@@ -11,6 +11,25 @@ public static class ArraySelector
 
     private static int[] ListSelector(int[] list1, int[] list2, int[] select)
     {
-        return new int[0];
+
+        // Use the length of the 'select' parameter to set the capacity of a new list 
+        int[] newList = new int[select.Length];
+        // loop through the length of 'select' parameter
+        for(var i = 0; i < select.Length; i++)
+        {
+            // check if the index of select is within bound
+            if(select[i] >= 0 && select[i] < list1.Length)
+            {
+                newList[i] = list1[select[i]];
+            }
+            else if(select[i] >= list1.Length && select[i] < list1.Length + list2.Length)
+            {
+                newList[i] = list2[select[i] - list1.Length];
+            }
+            else{
+                newList[i] = -1;
+            }
+        }
+        return newList;
     }
 }

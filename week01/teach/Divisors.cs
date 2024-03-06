@@ -19,6 +19,12 @@ public static class Divisors {
     private static List<int> FindDivisors(int number) {
         List<int> results = new List<int>();
         // Todo problem 1
+        if(number % 2 == 0)
+        {
+            results.Add(number);
+           
+        }
+        
         return results;
     }
 }
