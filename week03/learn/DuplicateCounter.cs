@@ -4,6 +4,7 @@
 
     public static void Run()
     {
+        // var harsh = new HashSet<int>;
         int[] data = {
             50, 9, 24, 100, 7, 75, 93, 24, 17, 16, 97, 6, 18, 81, 48, 37, 49, 33, 60, 3, 99, 32, 88, 29, 65, 20, 35, 33,
             15, 81, 31, 93, 17, 5, 5, 79, 12, 91, 18, 31, 12, 94, 39, 98, 10, 72, 20, 79, 100, 27, 46, 28, 50, 1, 7, 14,
@@ -18,13 +19,68 @@
             65
         };
 
+
         Console.WriteLine($"Number of items in the collection: {data.Length}");
         Console.WriteLine($"Number of duplicates : {CountDuplicates(data)}");
     }
 
     private static int CountDuplicates(int[] data)
     {
-        // Add code here.
-        return 0;
+        // number of times items are repeatd
+        int numOfTimes = 0;
+        
+        // create new and empty dictionary
+        // var duplicates =  new Dictionary<int, int>();
+
+        // loop through the array
+        // foreach(var x in data)
+        // {
+        //     // increase the item if the item already exist in the dictionary
+        //     if(duplicates.ContainsKey(x))
+        //     {
+        //         ++duplicates[x] ;
+        //     }
+        //     else {
+        //         // assign  the value items to 1, if they are not already in the array
+        //         duplicates[x] = 1;
+        //     }
+        // }
+
+    //     var duplicates1 = duplicates.Where(xn => xn.Value > 1);
+    //     Console.WriteLine($"\n duplicated number of duplications: \n{String.Join(", ", duplicates1)}");
+
+
+    // //   checks for items that are duplicated in the array and count how many items are duplicated
+    //     foreach(var xn in duplicates)
+    //     {
+    //         if(xn.Value > 1)
+    //         {
+    //              numOfTimes++;
+                
+    //              //Console.WriteLine($"{xn.Key} repeats {xn.Value} times");
+
+    //         }
+            
+    //     }
+
+    var set = new HashSet<int>();
+    
+
+        foreach(var xn in data)
+        {
+            if(set.Contains(xn))
+            {
+                numOfTimes++;
+            }
+            else {
+                set.Add(xn);
+
+            }
+        }
+
+        Console.WriteLine("\n"+ String.Join(",", set) + "\n");
+        // Console.WriteLine($"\nNUMBER OF DUPLICATES: {data.Count() - set.Count()}");
+
+        return data.Count() - set.Count();
     }
 }

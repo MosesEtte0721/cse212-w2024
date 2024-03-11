@@ -23,13 +23,17 @@ public static class MysteryStack2 {
                 var op2 = stack.Pop();
                 var op1 = stack.Pop();
                 float res;
-                if (item == "+") {
+                if (item == "+") 
+                {
                     res = op1 + op2;
                 }
-                else if (item == "-") {
+
+                else if (item == "-") 
+                {
                     res = op1 - op2;
                 }
-                else if (item == "*") {
+                else if (item == "*") 
+                {
                     res = op1 * op2;
                 }
                 else {

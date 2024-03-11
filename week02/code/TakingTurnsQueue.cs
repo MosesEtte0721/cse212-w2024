@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 /// <summary>
 /// This queue is circular.  When people are added via add_person, then they are added to the 
 /// back of the queue (per FIFO rules).  When get_next_person is called, the next person
@@ -9,6 +12,7 @@
 /// </summary>
 public class TakingTurnsQueue {
     private readonly PersonQueue _people = new();
+    
 
     public int Length => _people.Length;
 
@@ -31,7 +35,7 @@ public class TakingTurnsQueue {
     /// </summary>
     public void GetNextPerson() {
         if (_people.IsEmpty())
-            Console.WriteLine("No one in the queue.");
+            throw new InvalidOperationException("No one in the queue");
         else {
             Person person = _people.Dequeue();
             if (person.Turns > 1) {
