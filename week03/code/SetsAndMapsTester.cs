@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Collections.Generic;
 
 public static class SetsAndMapsTester {
     public static void Run() {
@@ -18,7 +19,7 @@ public static class SetsAndMapsTester {
         Console.WriteLine("---------");
         DisplayPairs(new[] { "ab", "ac" }); // No pairs displayed
         Console.WriteLine("---------");
-        DisplayPairs(new[] { "ab", "aa", "ba" });
+        DisplayPairs(new[] { "ab", "aa", "ba", "baba", "abab" });
         // ba & ab
         Console.WriteLine("---------");
         DisplayPairs(new[] { "23", "84", "49", "13", "32", "46", "91", "99", "94", "31", "57", "14" });
@@ -101,16 +102,45 @@ public static class SetsAndMapsTester {
     /// </code>
     /// The order of the display above does not matter. <c>at</c> would not 
     /// be displayed because <c>ta</c> is not in the list of words.
-    ///
+    ///kl
     /// As a special case, if the letters are the same (example: 'aa') then
     /// it would not match anything else (remember the assumption above
     /// that there were no duplicates) and therefore should not be displayed.
     /// </summary>
     /// <param name="words">An array of 2-character words (lowercase, no duplicates)</param>
-    private static void DisplayPairs(string[] words) {
+    private static void DisplayPairs(string[] words) 
+    {        
         // To display the pair correctly use something like:
         // Console.WriteLine($"{word} & {pair}");
         // Each pair of words should displayed on its own line.
+
+        var dict = new Dictionary<string, int>();
+        var set = new HashSet<string>();
+        for (int i = 0; i < words.Length; i++)
+        {
+        // conver each string in the array (words) to array of char
+            char[] charArray = words[i].ToCharArray();
+        //  reverse the order of the array of char
+            Array.Reverse(charArray);
+        //   store the reversed array of char as string
+            string reversed = new string(charArray);
+        /*   assign each item in the array as KEY in the dictionary and give them a 
+                value of their indices if the items items do not exist in the dictionary already
+        */
+            if(!dict.ContainsKey(words[i]))
+                dict[words[i]] = i;
+        //  check if the reversed item is not in the dictionary already and if the reversed is not the same as the one in the array(words)
+            if(!dict.ContainsKey(reversed) && reversed != words[i])
+                // add the reversed item and the item in array to the set
+                set.Add($"{reversed} & {words[i]} ");
+        }
+        // display each item and its reversed
+        foreach(var x in set)
+        {
+            Console.WriteLine(x);
+        }
+        
+                       
     }
 
     /// <summary>
@@ -156,9 +186,85 @@ public static class SetsAndMapsTester {
     /// #############
     /// # Problem 3 #
     /// #############
-    private static bool IsAnagram(string word1, string word2) {
-        // Todo Problem 3 - ADD YOUR CODE HERE
-        return false;
+    private static bool IsAnagram(string word1, string word2) 
+    {
+        // Todo Problem 3 - ADD YOUR CODE HERE\
+        // remove white spaces, convert to lowercase and then to an array
+        char[] firstWord = word1.Replace(" ", "").ToLower().ToCharArray();
+        char[] secondWord = word2.Replace(" ", "").ToLower().ToCharArray();
+
+        // string str1 = new string(firstWord);
+        // string str2 = new string(secondWord);
+
+
+
+        if(firstWord.Length != secondWord.Length)
+        {
+
+            return false;
+        }
+        
+
+        var dict = new Dictionary<char, int>();
+
+        for (var ix = 0; ix < firstWord.Length; ix++)
+        {
+            if(dict.ContainsKey(firstWord[ix]))
+            {
+                dict[firstWord[ix]]+= 1;
+            }
+            else {
+
+                // dict[firstWord[ix]] = 1;
+                dict.Add(firstWord[ix], 1);
+            }          
+                
+        }
+            foreach(var xi in secondWord)
+                        {
+                            
+                            if(!dict.ContainsKey(xi))
+                            {
+                                return false;
+                            }
+                            
+                            if(--dict[xi] == 0)
+                            {
+                                // Console.WriteLine("Doest not contain the keys");
+                                dict.Remove(xi);
+                                
+                                // return false;
+                            }
+                            // if(dict[secondWord[xi]] < 0)
+                            // {
+                            //     // Console.WriteLine("Less than zERO");
+                            //     return false;
+                            // }
+                            
+                        }
+
+            // foreach(var ex in dict.Values)
+            // {
+            //     if(ex != 0 )
+            //     {
+            //         return false;
+            //     }
+            // }
+            return dict.Count == 0;
+
+//      Sort the letters in Ascending order
+//         Array.Sort(firstWord);
+//         Array.Sort(secondWord);
+
+// //      return the words as strings
+//         string sorted1 = new string(firstWord);
+//         string sorted2 = new string(secondWord);
+
+// //      return true if the words matches
+//         return sorted1 == sorted2;
+            // return dict.Count == 0;
+            
+
     }
 
     /// <summary>
