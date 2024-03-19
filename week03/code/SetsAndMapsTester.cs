@@ -1,8 +1,10 @@
 using System.Text.Json;
 using System.Collections.Generic;
 
-public static class SetsAndMapsTester {
-    public static void Run() {
+public static class SetsAndMapsTester 
+{
+    public static void Run() 
+    {
         // Problem 1: Find Pairs with Sets
         Console.WriteLine("\n=========== Finding Pairs TESTS ===========");
         DisplayPairs(new[] { "am", "at", "ma", "if", "fi" });
@@ -157,11 +159,25 @@ public static class SetsAndMapsTester {
     /// #############
     /// # Problem 2 #
     /// #############
-    private static Dictionary<string, int> SummarizeDegrees(string filename) {
+    private static Dictionary<string, int> SummarizeDegrees(string filename) 
+    {
         var degrees = new Dictionary<string, int>();
         foreach (var line in File.ReadLines(filename)) {
             var fields = line.Split(",");
+
             // Todo Problem 2 - ADD YOUR CODE HERE
+            var degreeName = fields[3];
+            // var numOfPeopleWithDegree = fields[5];
+            if(!degrees.ContainsKey(degreeName))
+            {
+                degrees[degreeName] = 1;
+            }
+            else if(degrees.ContainsKey(degreeName))
+            {
+                degrees[degreeName]++;
+            }
+
+
         }
 
         return degrees;
@@ -197,59 +213,50 @@ public static class SetsAndMapsTester {
         // string str2 = new string(secondWord);
 
 
-
+//      returns false if the length of the two strings or array of char is not the same 
         if(firstWord.Length != secondWord.Length)
         {
-
             return false;
         }
         
-
+//      Create a hash table by creating a dictionary
         var dict = new Dictionary<char, int>();
 
+//      through the first word
         for (var ix = 0; ix < firstWord.Length; ix++)
         {
+            // increase the value of a key by if the key already exist in the dictionary
             if(dict.ContainsKey(firstWord[ix]))
             {
                 dict[firstWord[ix]]+= 1;
             }
             else {
 
-                // dict[firstWord[ix]] = 1;
+                // if the key does not exist already, add the first word as the key of the dictionary and give ut a value of 1
                 dict.Add(firstWord[ix], 1);
             }          
                 
         }
-            foreach(var xi in secondWord)
-                        {
-                            
-                            if(!dict.ContainsKey(xi))
-                            {
-                                return false;
-                            }
-                            
-                            if(--dict[xi] == 0)
-                            {
-                                // Console.WriteLine("Doest not contain the keys");
-                                dict.Remove(xi);
-                                
-                                // return false;
-                            }
-                            // if(dict[secondWord[xi]] < 0)
-                            // {
-                            //     // Console.WriteLine("Less than zERO");
-                            //     return false;
-                            // }
-                            
-                        }
 
-            // foreach(var ex in dict.Values)
-            // {
-            //     if(ex != 0 )
-            //     {
-            //         return false;
-            //     }
-            // }
+//      loop through the second word
+        foreach(var xi in secondWord)
+        {
+//          returnt false if the second word does not exist in the dictionary 
+            if(!dict.ContainsKey(xi))
+            {
+                return false;
+            }
+//          remove the key from the element if the count of the element is zero
+            if(--dict[xi] == 0)
+            {
+                
+                dict.Remove(xi);
+
+            }
+            
+            
+        }
+//          return true is the size or length of the dictionary is ZERO 
             return dict.Count == 0;
 
 //      Sort the letters in Ascending order
@@ -270,7 +277,8 @@ public static class SetsAndMapsTester {
     /// <summary>
     /// Sets up the maze dictionary for problem 4
     /// </summary>
-    private static Dictionary<ValueTuple<int, int>, bool[]> SetupMazeMap() {
+    private static Dictionary<ValueTuple<int, int>, bool[]> SetupMazeMap() 
+    {
         Dictionary<ValueTuple<int, int>, bool[]> map = new() {
             { (1, 1), new[] { false, true, false, true } },
             { (1, 2), new[] { false, true, true, false } },
@@ -326,7 +334,9 @@ public static class SetsAndMapsTester {
     /// https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php
     /// 
     /// </summary>
-    private static void EarthquakeDailySummary() {
+    private static void EarthquakeDailySummary() 
+    {
+       
         const string uri = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson";
         using var client = new HttpClient();
         using var getRequestMessage = new HttpRequestMessage(HttpMethod.Get, uri);
@@ -341,5 +351,15 @@ public static class SetsAndMapsTester {
         // 1. Add code in FeatureCollection.cs to describe the JSON using classes and properties 
         // on those classes so that the call to Deserialize above works properly.
         // 2. Add code below to print out each place a earthquake has happened today and its magitude.
+       
+
+        foreach (var feature in featureCollection.features)
+        {
+            // place.Add(feature.properties.place, feature.properties.mag);
+            Console.WriteLine($"Place: {feature.properties.place ?? "NULL"}, Magnitude: {feature.properties.mag}\nCoordinates: {feature.geometry.coordinates[0]}, {feature.geometry.coordinates[1]}");
+        }
+
+     
     }
+    
 }
