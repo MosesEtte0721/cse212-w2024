@@ -45,8 +45,10 @@ public class CustomerService {
     /// Defines a Customer record for the service queue.
     /// This is an inner class.  Its real name is CustomerService.Customer
     /// </summary>
-    private class Customer {
-        public Customer(string name, string accountId, string problem) {
+    private class Customer \
+    {
+        public Customer(string name, string accountId, string problem) 
+        {
             Name = name;
             AccountId = accountId;
             Problem = problem;
@@ -87,6 +89,7 @@ public class CustomerService {
     /// <summary>
     /// Dequeue the next customer and display the information.
     /// </summary>
+    
     private void ServeCustomer() {
         _queue.RemoveAt(0);
         var customer = _queue[0];

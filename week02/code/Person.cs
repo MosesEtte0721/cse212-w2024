@@ -7,7 +7,7 @@ public class Person {
         Turns = turns;
     }
 
-    public override string ToString() {
-        return Turns <= 0 ? $"({Name}:Forever)" : $"({Name}:{Turns})";
+    public void ToString() {
+        Console.WriteLine(Turns <= 0 ? $"({Name}:Forever)" : $"({Name}:{Turns})");
     }
 }

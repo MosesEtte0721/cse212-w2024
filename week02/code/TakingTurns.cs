@@ -15,10 +15,11 @@
         Console.WriteLine(players.Length);
         // players.n
         // Console.WriteLine(String.Join(", ", players));    // This can be un-commented out for debug help
+        
         while (players.Length > 0)
             players.GetNextPerson();
         // Defect(s) Found: 
-        players.ToString();
+        // Console.WriteLine(string.Join("",players.ToString));
 
         Console.WriteLine("---------");
 
