@@ -77,7 +77,7 @@ internal class PriorityItem
 
 
     
-    public override string ToString() {
+    public  string ToSstring() {
         return $"{Value} (Pri:{Priority})";
     }
 }
