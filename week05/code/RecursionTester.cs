@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+
 public static class RecursionTester {
     /// <summary>
     /// Entry point for the Prove 8 tests
@@ -7,10 +9,13 @@ public static class RecursionTester {
         Console.WriteLine("\n=========== PROBLEM 1 TESTS ===========");
         Console.WriteLine(SumSquaresRecursive(10)); // 385
         Console.WriteLine(SumSquaresRecursive(100)); // 338350
+        Console.WriteLine(SumSquaresRecursive(5)); // 55
 
         // Sample Test Cases (may not be comprehensive) 
         Console.WriteLine("\n=========== PROBLEM 2 TESTS ===========");
+        // Console.WriteLine(PermutationsChoose("ABCD", 3));
         PermutationsChoose("ABCD", 3);
+        // PermutationsChoose("ABCD", 3);
         // Expected Result (order may be different):
         // ABC
         // ABD
@@ -39,6 +44,7 @@ public static class RecursionTester {
 
         Console.WriteLine("---------");
         PermutationsChoose("ABCD", 2);
+        // Console.WriteLine(PermutationsChoose("ABCD", 2));
         // Expected Result (order may be different):
         // AB
         // AC
@@ -55,6 +61,7 @@ public static class RecursionTester {
 
         Console.WriteLine("---------");
         PermutationsChoose("ABCD", 1);
+        // Console.WriteLine(PermutationsChoose("ABCD", 1));
         // Expected Result (order may be different):
         // A
         // B
@@ -67,7 +74,8 @@ public static class RecursionTester {
         Console.WriteLine(CountWaysToClimb(20)); // 121415
         // Uncomment out the test below after implementing memoization.  It won't work without it.
         // TODO Problem 3
-        // Console.WriteLine(CountWaysToClimb(100));  // 180396380815100901214157639
+        var remember = new Dictionary<int, decimal>();
+        Console.WriteLine(CountWaysToClimb(100,remember) );  // 180396380815100901214157639
 
         // Sample Test Cases (may not be comprehensive) 
         Console.WriteLine("\n=========== PROBLEM 4 TESTS ===========");
@@ -147,7 +155,17 @@ public static class RecursionTester {
     /// </summary>
     public static int SumSquaresRecursive(int n) {
         // TODO Start Problem 1
-        return 0;
+        if(n <= 1)
+        {
+            return 1;
+        }
+        else 
+        {
+            var square = n * n;
+            return square + SumSquaresRecursive(n-1);
+        }
+
+    
     }
 
     /// <summary>
@@ -169,9 +187,82 @@ public static class RecursionTester {
     /// You can assume that the size specified is always valid (between 1 
     /// and the length of the letters list).
     /// </summary>
-    public static void PermutationsChoose(string letters, int size, string word = "") {
-        // TODO Start Problem 2
+  
+
+//     public static string PermutationsChoose(string letters, int size, string word = "")
+// // {
+//     // Base case: If the word is empty, return an empty string
+//     if (word == "")
+//     {
+//         return "";
+//     }
+//     else
+//     {
+//         // Convert the letters string to a character array
+//         char[] characterArray = letters.Replace(" ", "").ToCharArray();
+
+//         // Swap characters at indices 'i' and 'size'
+//         char temp = characterArray[i];
+//         characterArray[i] = characterArray[size];
+//         characterArray[size] = temp;
+
+//         // Recursive call to generate permutations
+//         return PermutationsChoose(new string(characterArray), size - 1, word);
+//     }
+// }
+
+// public static void PermutationsChoose(string letters, int size, string word = "")
+// {
+//     // Base case: If the word is empty, return an empty string
+//     if (word == "")
+//     {
+//         Console.WriteLine("NOTHING IS FOUND");
+//     }
+//     else
+//     {
+//         // Convert the letters string to a character array
+//         char[] characterArray = letters.Replace(" ", "").ToCharArray();
+
+//         // Swap characters at indices 'size' and 'size - 1'
+//         char temp = characterArray[size];
+//         characterArray[size] = characterArray[size - 1];
+//         characterArray[size - 1] = temp;
+
+//         // Recursive call to generate permutations
+//         Console.WriteLine( PermutationsChoose(new string(characterArray), size - 1, word));
+//     }
+// }
+
+
+ private static void Swap( char a,  char b)
+    {
+        if (a == b) return;
+        var temp = a;
+        a = b;
+        b = temp;
     }
+
+    private static void PermutationsChoose(string str, int l, string word = "")
+    {
+        if (l == str.Length)
+            Console.WriteLine(word);
+        else
+        {
+            for (int i = l; i < str.Length; i++)
+            {
+                char currentChar = str[i];
+                Swap( str[i],  str[l]);
+                PermutationsChoose(str, l + 1, word + currentChar);
+                Swap( str[i],  str[l]); // Backtrack
+            }
+        }
+    }
+
+
+
+
+
+
 
     /// <summary>
     /// #############
@@ -220,6 +311,15 @@ public static class RecursionTester {
     /// </summary>
     public static decimal CountWaysToClimb(int s, Dictionary<int, decimal>? remember = null) {
         // Base Cases
+        if(remember == null)
+        {
+            remember = new Dictionary<int, decimal>();
+        }
+
+        if(remember.ContainsKey(s))
+        {
+            return remember[s];
+        }
         if (s == 0)
             return 0;
         if (s == 1)
@@ -228,9 +328,10 @@ public static class RecursionTester {
             return 2;
         if (s == 3)
             return 4;
-
+        
         // Solve using recursion
-        decimal ways = CountWaysToClimb(s - 1) + CountWaysToClimb(s - 2) + CountWaysToClimb(s - 3);
+        decimal ways = CountWaysToClimb(s - 1, remember) + CountWaysToClimb(s - 2, remember) + CountWaysToClimb(s - 3, remember);
+        remember[s] = ways;
         return ways;
     }
 
@@ -249,6 +350,22 @@ public static class RecursionTester {
     /// </summary>
     public static void WildcardBinary(string pattern) {
         // TODO Start Problem 4
+        int IndexOfWildcard = pattern.IndexOf('*');
+        if (IndexOfWildcard == -1)
+        {
+            Console.WriteLine(pattern);
+        }
+        else
+        {
+            string patternWithZero = pattern.Substring(0,IndexOfWildcard) +  '0' + pattern[(IndexOfWildcard + 1)..];
+            string patternWithOne = pattern[..IndexOfWildcard] + '1' + pattern.Substring(IndexOfWildcard + 1);
+            // pattern[..IndexOfWildcard] is the same as pattern.Substring(0,IndexOfWildcard)
+            // pattern[(IndexOfWildcard + 1)..]; is the same as pattern pattern.Substring(IndexOfWildcard + 1)
+
+            WildcardBinary(patternWithZero);
+            WildcardBinary(patternWithOne);
+        } 
+
     }
 
     /// <summary>
@@ -256,16 +373,32 @@ public static class RecursionTester {
     /// 'end' square.
     /// </summary>
     public static void SolveMaze(Maze maze, int x = 0, int y = 0, List<ValueTuple<int, int>>? currPath = null) {
-        // If this is the first time running the function, then we need
-        // to initialize the currPath list.
-        if (currPath == null)
-            currPath = new List<ValueTuple<int, int>>();
+    // If this is the first time running the function, then we need
+    // to initialize the currPath list.
+    if (currPath == null)
+        currPath = new List<ValueTuple<int, int>>();
 
-        // currPath.Add((1,2)); // Use this syntax to add to the current path
+    // Add the current position to the path
+    currPath.Add((x, y));
 
-        // TODO Start Problem 5
-        // ADD CODE HERE
-
-        // Console.WriteLine(currPath.AsString()); // Use this to print out your path when you find the solution
+    // print the pattern and return if reaches the end of the maze
+    if (x == maze.Width - 1 && y == maze.Height - 1) {
+        Console.WriteLine(string.Join(" -> ", currPath));
+        return;
     }
+
+    // move right if it is a valid move
+    if (maze.IsValidMove(currPath, x + 1, y)) {
+        SolveMaze(maze, x + 1, y, new List<ValueTuple<int, int>>(currPath));
+    }
+
+    // move down if it is a valid move
+    if (maze.IsValidMove(currPath, x, y + 1)) {
+        SolveMaze(maze, x, y + 1, new List<ValueTuple<int, int>>(currPath));
+    }
+
+    // If it can't move right or down, it is backtracked by removing the current position from the path
+    currPath.RemoveAt(currPath.Count - 1);
+}
+
 }
