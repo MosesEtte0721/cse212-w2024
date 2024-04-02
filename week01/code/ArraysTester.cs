@@ -32,13 +32,13 @@ public static class ArraysTester {
         
         numbers = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
         Console.WriteLine("RotateListRight(numbers, 5)");
-        Console.WriteLine($"<List>{{{string.Join(',', numbers)}}} "); // <List>{5, 6, 7, 8, 9, 1, 2, 3, 4}
+        Console.WriteLine($"<List>{{{string.Join(", ", numbers)}}} "); // <List>{5, 6, 7, 8, 9, 1, 2, 3, 4}
         RotateListRight(numbers, 5); 
         Console.WriteLine();
 
         numbers = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
         Console.WriteLine("RotateListRight(numbers, 3)");
-        Console.WriteLine($"<List>{{{string.Join(',', numbers)}}} "); // <List>{7, 8, 9, 1, 2, 3, 4, 5, 6}
+        Console.WriteLine($"<List>{{{string.Join(", ", numbers)}}} "); // <List>{7, 8, 9, 1, 2, 3, 4, 5, 6}
         RotateListRight(numbers, 3);
         Console.WriteLine();
 
@@ -87,8 +87,8 @@ public static class ArraysTester {
         copyOfData.RemoveRange(len - amount, amount);
         // insert 
         list.InsertRange(amount, copyOfData);
-        // return list;
-        Console.WriteLine(String.Join("", list));
+        // return list;]
+        Console.WriteLine($"Rotated list: {{{String.Join(", ", list)}}}");
 
     }
 }

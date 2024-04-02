@@ -26,11 +26,16 @@ public class Node {
 
     public bool Contains(int value) {
         // TODO Start Problem 2
+        Node? _root;
+        // if(_root.)
         return false;
     }
 
     public int GetHeight() {
         // TODO Start Problem 4
+        BinarySearchTree bst =  new BinarySearchTree();
+        bst.
+        
         return 0; // Replace this line with the correct return statement(s)
     }
 }
