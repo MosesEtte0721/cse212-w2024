@@ -1,4 +1,7 @@
-﻿public class PriorityQueue
+﻿using System;
+using System.Text;
+
+public class PriorityQueue
 {
     private List<PriorityItem> _queue = new();
 
@@ -46,7 +49,8 @@ public void Enqueue(string value, int priority)
 
         // Find the index of the item with the highest priority to remove
         var highPriorityIndex = 0;
-        for (int index = 1; index < _queue.Count - 1; index++) {
+        for (int index = 1; index < _queue.Count - 1; index++) 
+        {
             if (_queue[index].Priority >= _queue[highPriorityIndex].Priority)
                 highPriorityIndex = index;
                 
@@ -61,7 +65,13 @@ public void Enqueue(string value, int priority)
 
     public void ToString() 
     {
-        Console.WriteLine($"[{string.Join(", ", _queue)}]");
+        // StringBuilder sb = new StringBuilder();
+        foreach (var item in this._queue)
+        {
+            Console.WriteLine($"{item.ValuePriority()}");
+        }
+        
+      
     }
 }
 
@@ -77,7 +87,7 @@ internal class PriorityItem
 
 
     
-    public  string ToSstring() {
+    public  string ValuePriority() {
         return $"{Value} (Pri:{Priority})";
     }
 }
