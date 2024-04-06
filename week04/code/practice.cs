@@ -79,3 +79,130 @@ public class AllNodes
         }
     }
 }
+
+
+// public void Remove(int value) 
+// {
+//     Node? current = _head;
+//     while (current != null)
+//     {
+//         if (current.Data == value)
+//         {
+//             // If node to be deleted is head node
+//             if (current == _head)
+//             {
+//                 _head = _head.Next;
+//                 if (_head != null)
+//                 {
+//                     _head.Prev = null;
+//                 }
+//                 else
+//                 {
+//                     _tail = null; // If head is null, then tail should also be null
+//                 }
+//             }
+//             else
+//             {
+//                 // Connect the previous node and the next node
+//                 if (current.Prev != null)
+//                 {
+//                     current.Prev.Next = current.Next;
+//                 }
+//                 if (current.Next != null)
+//                 {
+//                     current.Next.Prev = current.Prev;
+//                 }
+//                 else
+//                 { 
+//                     _tail = current.Prev; 
+//                     if (_tail != null)
+//                     {
+//                         _tail.Next = null; // If tail is not null, its next should be null
+//                     }
+//                 } // If node to be deleted is tail node
+//             }
+//             return;
+//         }
+//         current = current.Next;
+//     }
+// }
+
+/*
+
+ public void Remove(int value) 
+{
+    Node? current = _head;
+    while (current != null)
+    {
+        if (current.Data == value)
+        {
+            // If node to be deleted is head node
+            if (current == _head)
+            {
+                _head = _head.Next;
+                if (_head != null)
+                {
+                    _head.Prev = null;
+                }
+            }
+            else
+            {
+                // Connect the previous node and the next node
+                if (current.Prev != null)
+                {
+                    current.Prev.Next = current.Next;
+                }
+                if (current.Next != null)
+                {
+                    current.Next.Prev = current.Prev;
+                }
+                else
+                { 
+                    _tail = current.Prev; 
+                } // If node to be deleted is tail node
+            }
+            return;
+        }
+        current = current.Next;
+    }
+}
+
+
+
+    /// <summary>
+    /// Search for all instances of 'oldValue' and replace the value to 'newValue'.
+    /// </summary>
+    public void Replace(int oldValue, int newValue) {
+    Node? curr = _head;
+    while(curr is not null)
+    {
+        if(curr.Data == oldValue)
+        {
+            curr.Data = newValue; // replace all instances of the value
+        }
+      
+        curr = curr.Next;
+    }
+}
+
+
+    /// <summary>
+    /// Yields all values in the linked list
+    /// </summary>
+    IEnumerator IEnumerable.GetEnumerator() {
+        // call the generic version of the method
+        return this.GetEnumerator();
+    }
+
+    /// <summary>
+    /// Iterate forward through the Linked List
+    /// </summary>
+    public IEnumerator<int> GetEnumerator() {
+        var curr = _head; // Start at the beginning since this is a forward iteration.
+        while (curr is not null) {
+            yield return curr.Data; // Provide (yield) each item to the user
+            curr = curr.Next; // Go forward in the linked list
+        }
+    }
+
+*/

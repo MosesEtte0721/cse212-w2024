@@ -65,12 +65,14 @@ public static class LinkedListTester {
         ll.Replace(2, 10);
         Console.WriteLine(ll.ToString()); // <LinkedList>{4, 35, 10, 10}
         ll.Replace(7, 5);
-        Console.WriteLine(ll.ToString()); // <LinkedList>{4, 35, 10, 10}
+        Console.WriteLine(ll.ToString());// <LinkedList>{4, 35, 10, 10}
         ll.Replace(4, 100);
         Console.WriteLine(ll.ToString()); // <LinkedList>{100, 35, 10, 10}
 
-
         Console.WriteLine("\n=========== PROBLEM 5 TESTS ===========");
-        Console.WriteLine(ll.Reverse().AsString()); // <IEnumerable>[10, 10, 35, 100}
+        // Console.WriteLine(ll.Reverse().ToString()); // <IEnumerable>[10, 10, 35, 100}
+        Console.WriteLine($"[{string.Join(", ", ll.Reverse())}]"); // <IEnumerable>[10, 10, 35, 100]
+        // Console.WriteLine(string.Join(", ", ll.Reverse().ToArray()));
+
     }
 }
