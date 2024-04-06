@@ -205,4 +205,45 @@ public class AllNodes
         }
     }
 
+    public void Remove(int value) 
+{
+    Node? current = _head;
+    while (current != null)
+    {
+        if (current.Data == value)
+        {
+            // If node to be deleted is head node
+            if (current == _head)
+            {
+                _head = _head.Next;
+                if (_head != null)
+                {
+                    _head.Prev = null;
+                }
+            }
+            else
+            {
+                // Connect the previous node and the next node
+                if (current.Prev != null)
+                {
+                    current.Prev.Next = current.Next;
+                }
+                if (current.Next != null)
+                {
+                    current.Next.Prev = current.Prev;
+                }
+                else
+                { 
+                    _tail = current.Prev; 
+                } // If node to be deleted is tail node
+            }
+            return;
+        }
+        current = current.Next;
+    }
+}
+
+
+
+
 */

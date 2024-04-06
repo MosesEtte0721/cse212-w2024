@@ -27,7 +27,8 @@ public class PersonQueue
         return Length == 0;
     }
 
-    public override string ToString() {
+    public override string ToString() 
+    {
         return $"[{string.Join(", ", _queue)}]";
     }
 }

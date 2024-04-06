@@ -8,34 +8,45 @@ public class Node {
     }
 
     public void Insert(int value) {
-        if (value < Data) {
-            // Insert to the left
-            if (Left is null)
-                Left = new Node(value);
-            else
-                Left.Insert(value);
-        }
-        else {
-            // Insert to the right
-            if (Right is null)
-                Right = new Node(value);
-            else
-                Right.Insert(value);
-        }
+    if (value < Data) {
+        // Insert to the left
+        if (Left is null)
+            Left = new Node(value);
+        else
+            Left.Insert(value);
+    } 
+    else if (value > Data) {
+        // Insert to the right
+        if (Right is null)
+            Right = new Node(value);
+        else
+            Right.Insert(value);
     }
+    // If value == Data, do nothing (no duplicates)
+}
+
 
     public bool Contains(int value) {
-        // TODO Start Problem 2
-        Node? _root;
-        // if(_root.)
-        return false;
+    if (value < Data) {
+        // Search the left subtree
+        return Left != null && Left.Contains(value);
+    } else if (value > Data) {
+        // Search the right subtree
+        return Right != null && Right.Contains(value);
+    } else {
+        // Value is equal to the data of this node
+        return true;
     }
+}
+
 
     public int GetHeight() {
         // TODO Start Problem 4
         BinarySearchTree bst =  new BinarySearchTree();
-        bst.
+        int leftHeight = Left?.GetHeight() ?? 0;
+        int rightHeight = Right?.GetHeight() ?? 0;
+        return Math.Max(leftHeight, rightHeight) + 1;
         
-        return 0; // Replace this line with the correct return statement(s)
+        // return 0; // Replace this line with the correct return statement(s)
     }
 }

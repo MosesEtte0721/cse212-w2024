@@ -2,7 +2,8 @@ public static class TreesTester {
     /// <summary>
     /// Entry point for the Prove 9 tests
     /// </summary>
-    public static void Run() {
+    public static void Run() 
+    {
         // Sample Test Cases (may not be comprehensive)
         Console.WriteLine("\n=========== PROBLEM 1 TESTS ===========");
         BinarySearchTree tree = new BinarySearchTree();
@@ -27,9 +28,14 @@ public static class TreesTester {
         Console.WriteLine(tree.Contains(9)); // False
 
         Console.WriteLine("\n=========== PROBLEM 3 TESTS ===========");
-        foreach (var value in tree.Reverse()) {
-            Console.WriteLine(value); // 10, 7, 6, 5, 4, 3, 1
+      
+        foreach (var value in tree.Reverse())
+        {
+            Console.Write($"{String.Join(", ",  value ) + ", " }");       
         }
+        
+
+
 
         Console.WriteLine("\n=========== PROBLEM 4 TESTS ===========");
         Console.WriteLine(tree.GetHeight()); // 3
@@ -66,6 +72,19 @@ public static class TreesTester {
         return bst;
     }
 
+    // private static BinarySearchTree CreateTreeFromSortedList(int[] sortedNumbers) 
+    // {
+    //     // Create an empty BST
+    //     var bst = new BinarySearchTree();
+
+    //     // Call the InsertMiddle method to insert elements from the sorted array into the BST
+    //     // in such a way that the resulting BST is balanced
+    //     InsertMiddle(sortedNumbers, 0, sortedNumbers.Length - 1, bst);
+
+    //     // Return the resulting BST
+    //     return bst;
+    // }
+
     /// <summary>
     /// This function will attempt to insert the item in the middle of 'sortedNumbers' into
     /// the 'bst' tree. The middle is determined by using indices represented by 'first' and
@@ -96,7 +115,22 @@ public static class TreesTester {
     /// <param name="first">the first index in the sortedNumbers to insert</param>
     /// <param name="last">the last index in the sortedNumbers to insert</param>
     /// <param name="bst">the BinarySearchTree in which to insert the values</param>
-    private static void InsertMiddle(int[] sortedNumbers, int first, int last, BinarySearchTree bst) {
+    private static void InsertMiddle(int[] sortedNumbers, int first, int last, BinarySearchTree bst) 
+    {
         // TODO Start Problem 5
+        // Base case: if first > last, then the subarray is empty and there's nothing to insert
+        if (first > last)
+            return;
+
+        // Calculate the middle index
+        int mid = first + (last - first) / 2;
+
+        // Insert the middle element into the BST
+        bst.Insert(sortedNumbers[mid]);
+
+        // Recursively insert the middle elements of the two subarrays
+        InsertMiddle(sortedNumbers, first, mid - 1, bst); // left subarray
+        InsertMiddle(sortedNumbers, mid + 1, last, bst); // right subarray
+
     }
 }
