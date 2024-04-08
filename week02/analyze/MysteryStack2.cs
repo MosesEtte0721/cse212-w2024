@@ -50,7 +50,8 @@ public static class MysteryStack2 {
 
                 stack.Push(res);
             }
-            else if (IsFloat(item)) {
+            else if (IsFloat(item)) 
+            {
                 stack.Push(float.Parse(item));
             }
             else if (item == "") 
@@ -62,7 +63,7 @@ public static class MysteryStack2 {
             }
         }
 
-        if (stack.Count != 1)
+        if (stack.Count != 1 )
             throw new ApplicationException("Invalid Case 4!");
 
         return stack.Pop();

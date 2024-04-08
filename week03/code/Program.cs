@@ -8,6 +8,9 @@ class Program
         SetsAndMapsTester.Run();
         
         // SetsAndMapsTester.Run();
+      var intersectUnion = new IntersectionUnion();
+      intersectUnion.RunIntersectUnion();
+
                
 
     }

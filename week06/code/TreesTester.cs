@@ -72,19 +72,7 @@ public static class TreesTester {
         return bst;
     }
 
-    // private static BinarySearchTree CreateTreeFromSortedList(int[] sortedNumbers) 
-    // {
-    //     // Create an empty BST
-    //     var bst = new BinarySearchTree();
-
-    //     // Call the InsertMiddle method to insert elements from the sorted array into the BST
-    //     // in such a way that the resulting BST is balanced
-    //     InsertMiddle(sortedNumbers, 0, sortedNumbers.Length - 1, bst);
-
-    //     // Return the resulting BST
-    //     return bst;
-    // }
-
+    
     /// <summary>
     /// This function will attempt to insert the item in the middle of 'sortedNumbers' into
     /// the 'bst' tree. The middle is determined by using indices represented by 'first' and

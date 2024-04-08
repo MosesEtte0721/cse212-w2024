@@ -47,6 +47,6 @@ public class Node {
         int rightHeight = Right?.GetHeight() ?? 0;
         return Math.Max(leftHeight, rightHeight) + 1;
         
-        // return 0; // Replace this line with the correct return statement(s)
+        
     }
 }
